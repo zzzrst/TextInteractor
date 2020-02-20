@@ -71,7 +71,7 @@ namespace TextInteractor
         /// <summary>
         /// This methods modifies the textfile by replacing text in the text file.
         /// </summary>
-        /// <param name="replaceType"> 0 means to replace once, 1 means to replaceAll, 2 means to replaceLine<see cref="int"/>.</param>
+        /// <param name="replaceType"> 0 means to replace once, 1 means to replaceAll, 2 means to replaceLine,3 means to replace regex<see cref="int"/>.</param>
         /// <param name="args">The args<see cref="string"/>.</param>
         /// <returns> <code>true</code> if the modification was successful. <see cref="bool"/>.</returns>
         public abstract bool Modify(int replaceType, string args);
