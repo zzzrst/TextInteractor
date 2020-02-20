@@ -26,9 +26,11 @@ namespace TextInteractor
             file.WriteLine("Employee name is [{#john#}], works for [{#ABC BANK#}],[{#Houston#}]");
             file.WriteLine("Bye NOW!");
             file.Close();
-            TextInteractor testFileA = new TextInteractor(testFile);
+            Interactor testFileA = new Interactor(testFile);
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            testFileA.Modify(3, @"\[\{\#(.*?)\#\}\]];[yo");
+
+            // @"\[\{\#(.*?)\#\}\]
+            testFileA.Modify(3, @"[a-zA-Z0-9]];[yo");
 
             watch.Stop();
             Console.WriteLine("\nThat took " + watch.ElapsedMilliseconds.ToString() + " milliseconds!");

@@ -1,4 +1,4 @@
-﻿// <copyright file="TextInteractor.cs" company="PlaceholderCompany">
+﻿// <copyright file="Interactor.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -11,9 +11,9 @@ namespace TextInteractor
     using System.Text.RegularExpressions;
 
     /// <summary>
-    /// Defines the <see cref="TextInteractor" />.
+    /// Defines the <see cref="Interactor" />.
     /// </summary>
-    public class TextInteractor : TextFile
+    public class Interactor : TextFile
     {
         /// <summary>
         /// Defines the reader.
@@ -26,10 +26,10 @@ namespace TextInteractor
         private List<string> log;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TextInteractor"/> class.
+        /// Initializes a new instance of the <see cref="Interactor"/> class.
         /// </summary>
         /// <param name="filePath">The file path of the text file.</param>
-        public TextInteractor(string filePath)
+        public Interactor(string filePath)
         {
             this.FilePath = filePath;
             this.Opened = false;
