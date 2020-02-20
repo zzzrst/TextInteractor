@@ -1,0 +1,504 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TextInteractor</name>
+    </assembly>
+    <members>
+        <member name="T:TextInteractor.CSVInteractor">
+            <summary>
+            Defines the <see cref="T:TextInteractor.CSVInteractor" />.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TextInteractor.CSVInteractor"/> class.
+            </summary>
+            <param name="filePath"> The filePath to find the CSV.</param>
+        </member>
+        <member name="P:TextInteractor.CSVInteractor.Header">
+            <summary>
+            Gets the Header
+            List containing the header titles of the CSV file.
+            </summary>
+        </member>
+        <member name="P:TextInteractor.CSVInteractor.Reader">
+            <summary>
+            Gets or sets the Reader
+            Gets or sets streamReader to read the CSV file.
+            </summary>
+        </member>
+        <member name="P:TextInteractor.CSVInteractor.Log">
+            <summary>
+            Gets or sets the Log.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.Open">
+            <summary>
+            This method opens the CSV file for reading and writing.
+            </summary>
+            <returns><code>true</code> if CSV file successfully opens.</returns>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.Close">
+            <summary>
+            This method closes the CSV file for reading and writing.
+            </summary>
+            <returns><code>true</code> if CSV file successfully closes.</returns>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.Compare(TextInteractor.TextFile)">
+            <summary>
+            This method compares the CSV file with another text file. Both files must be opened.
+            </summary>
+            <param name="txtFile">the other text file to be compared to.</param>
+            <returns><code>true</code> if contents of both files are identical.</returns>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.Compare(TextInteractor.TextFile,System.Boolean,System.Boolean)">
+            <summary>
+            This method compares the CSV file with another text file. Both files must be opened.
+            </summary>
+            <param name="txtFile">the other text file to be compared to.</param>
+            <param name="ignoreWhitespace">The ignoreWhitespace<see cref="T:System.Boolean"/>.</param>
+            <param name="caseInsensitive">The caseInsensitive<see cref="T:System.Boolean"/>.</param>
+            <returns><code>true</code> if contents of both files are identical.</returns>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.ReadLine">
+            <summary>
+            This method reads a line of characters from the file and returns it as a string.
+            </summary>
+            <returns>A string read from the file.</returns>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.ReadAndParseLine">
+            <summary>
+            This method reads and parses a row from the CSV file.
+            </summary>
+            <returns>A string array of the line's contents.</returns>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.ReadAndParseLine(System.Boolean)">
+            <summary>
+            This method reads and parses a row from the CSV file.
+            </summary>
+            <param name="trim">If true, removes surrounding whitespace from the parsed values.</param>
+            <returns>A string array of the line's contents.</returns>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.RestartReading">
+            <summary>
+            This method resets the reading of the CSV file back to the header.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.FinishedReading">
+            <summary>
+            This method returns whether or not the interactor is at the end of the file.
+            </summary>
+            <returns><code>true</code> if the interactor is at the end of the CSV file.</returns>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.AddRow(System.Collections.Generic.List{System.String})">
+            <summary>
+            This method adds a row of values to the CSV file, in the order they were inputted in the list.
+            </summary>
+            <param name="values">A list of values for the row to be added.</param>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.AddRow(System.String[])">
+            <summary>
+            This method adds a row of values to the CSV file, in the order they were inputted in the array.
+            </summary>
+            <param name="values">An array of values for the row to be added.</param>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.AddRow(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            This method adds a row of values to the CSV file, where the values are arranged by the
+            order of the titles they were mapped to.
+            </summary>
+            <param name="values">A dictionary of column titles mapping to their respective values.</param>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.AddColumn(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            This method adds a title and column of values to the CSV file.
+            </summary>
+            <param name="title">The new column title.</param>
+            <param name="values">A list of values for the column to be added.</param>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.AddColumn(System.String,System.String[])">
+            <summary>
+            This method adds a title and column of values to the CSV file.
+            </summary>
+            <param name="title">The new column title.</param>
+            <param name="values">An array of values for the column to be added.</param>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.Modify(System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.Compare(TextInteractor.TextFile,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            The Compare.
+            </summary>
+            <param name="txtFile">The txtFile<see cref="T:TextInteractor.TextFile"/>.</param>
+            <param name="startingLine">The startingLine<see cref="T:System.Int32"/>.</param>
+            <param name="startingIndex">The startingIndex<see cref="T:System.Int32"/>.</param>
+            <param name="endingLine">The endingLine<see cref="T:System.Int32"/>.</param>
+            <param name="endingIndex">The endingIndex<see cref="T:System.Int32"/>.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.Find(System.String,System.Int32)">
+            <summary>
+            The Find.
+            </summary>
+            <param name="expectedString">The expectedString<see cref="T:System.String"/>.</param>
+            <param name="line">The line<see cref="T:System.Int32"/>.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.InternalCompare(TextInteractor.CSVInteractor,System.Boolean)">
+            <summary>
+            The InternalCompare.
+            </summary>
+            <param name="csvFile">The csvFile<see cref="T:TextInteractor.CSVInteractor"/>.</param>
+            <param name="caseInsensitive">The caseInsensitive<see cref="T:System.Boolean"/>.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.InternalCompare(TextInteractor.TextFile,System.Boolean,System.Boolean)">
+            <summary>
+            The InternalCompare.
+            </summary>
+            <param name="txtFile">The txtFile<see cref="T:TextInteractor.TextFile"/>.</param>
+            <param name="ignoreWhitespace">The ignoreWhitespace<see cref="T:System.Boolean"/>.</param>
+            <param name="caseInsensitive">The caseInsensitive<see cref="T:System.Boolean"/>.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.CSVInteractor.InternalCreateErrorLog(System.String)">
+            <summary>
+            The CreateErrorLog.
+            </summary>
+            <param name="path">The path<see cref="T:System.String"/>.</param>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="T:TextInteractor.FileNotOpenedException">
+            <summary>
+            Exception for unopened files.
+            </summary>
+        </member>
+        <member name="F:TextInteractor.FileNotOpenedException.ErrorMsg">
+            <summary>
+            Defines the ErrorMsg.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.FileNotOpenedException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TextInteractor.FileNotOpenedException"/> class.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.FileNotOpenedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TextInteractor.FileNotOpenedException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String"/>.</param>
+        </member>
+        <member name="T:TextInteractor.InvalidColumnLengthException">
+            <summary>
+            Exception for invalid column lengths.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.InvalidColumnLengthException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TextInteractor.InvalidColumnLengthException"/> class.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.InvalidColumnLengthException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TextInteractor.InvalidColumnLengthException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String"/>.</param>
+        </member>
+        <member name="T:TextInteractor.InvalidHeaderTitleException">
+            <summary>
+            Exception for invalid header titles.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.InvalidHeaderTitleException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TextInteractor.InvalidHeaderTitleException"/> class.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.InvalidHeaderTitleException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TextInteractor.InvalidHeaderTitleException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String"/>.</param>
+        </member>
+        <member name="T:TextInteractor.InvalidRowLengthException">
+            <summary>
+            Exception for invalid row lengths.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.InvalidRowLengthException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TextInteractor.InvalidRowLengthException"/> class.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.InvalidRowLengthException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TextInteractor.InvalidRowLengthException"/> class.
+            </summary>
+            <param name="message">The message<see cref="T:System.String"/>.</param>
+        </member>
+        <member name="T:TextInteractor.TextDriver">
+            <summary>
+            Defines the <see cref="T:TextInteractor.TextDriver" />.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.TextDriver.Main(System.String[])">
+            <summary>
+            Main method used for testing.
+            </summary>
+            <param name="args">Command line arguments.</param>
+        </member>
+        <member name="T:TextInteractor.TextFile">
+            <summary>
+            This class represents a text file with data.
+            </summary>
+        </member>
+        <member name="P:TextInteractor.TextFile.FilePath">
+            <summary>
+            Gets or sets the FilePath
+            The full file path of the text file.
+            </summary>
+        </member>
+        <member name="P:TextInteractor.TextFile.Opened">
+            <summary>
+            Gets or sets a value indicating whether Opened
+            Boolean declaring whether or not the file is opened.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.TextFile.Open">
+            <summary>
+            This method opens the text file for reading and writing.
+            </summary>
+            <returns><code>true</code> if the text file successfully opens.</returns>
+        </member>
+        <member name="M:TextInteractor.TextFile.Close">
+            <summary>
+            This method closes the text file for reading and writing.
+            </summary>
+            <returns><code>true</code> if the text file successfully closes.</returns>
+        </member>
+        <member name="M:TextInteractor.TextFile.Compare(TextInteractor.TextFile)">
+            <summary>
+            This method compares the text file with another text file.
+            </summary>
+            <param name="txtFile">Text file to compare.</param>
+            <returns><code>true</code> if the contents of the text files match.</returns>
+        </member>
+        <member name="M:TextInteractor.TextFile.Compare(TextInteractor.TextFile,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            The Compare.
+            </summary>
+            <param name="txtFile">The txtFile<see cref="T:TextInteractor.TextFile"/>.</param>
+            <param name="startingLine">The startingLine<see cref="T:System.Int32"/>.</param>
+            <param name="startingIndex">The startingIndex<see cref="T:System.Int32"/>.</param>
+            <param name="endingLine">The endingLine<see cref="T:System.Int32"/>.</param>
+            <param name="endingIndex">The endingIndex<see cref="T:System.Int32"/>.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.TextFile.Compare(TextInteractor.TextFile,System.Boolean,System.Boolean)">
+            <summary>
+            This method compares the text file with another text file.
+            </summary>
+            <param name="txtFile">Text file to compare.</param>
+            <param name="ignoreWhitespace">if true, ignores surrounding whitespace while comparing.</param>
+            <param name="caseInsensitive">if true, ignores alphabetical case while comparing.</param>
+            <returns><code>true</code> if the contents of the text files match.</returns>
+        </member>
+        <member name="M:TextInteractor.TextFile.Find(System.String,System.Int32)">
+            <summary>
+            This method tries to find the expected string in the specified line.
+            </summary>
+            <param name="expectedString"> String to be found.</param>
+            <param name="line"> Line in the file to check, index starts at 1.</param>
+            <returns><code>true</code> if the expected string is found at line.</returns>
+        </member>
+        <member name="M:TextInteractor.TextFile.Modify(System.Int32,System.String)">
+            <summary>
+            This methods modifies the textfile by replacing text in the text file.
+            </summary>
+            <param name="replaceType"> 0 means to replace once, 1 means to replaceAll, 2 means to replaceLine,3 means to replace regex<see cref="T:System.Int32"/>.</param>
+            <param name="args">The args<see cref="T:System.String"/>.</param>
+            <returns> <code>true</code> if the modification was successful. <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.TextFile.ReadLine">
+            <summary>
+            This method reads a line of characters in the file and returns the data as a string.
+            </summary>
+            <returns>A string from the text file.</returns>
+        </member>
+        <member name="M:TextInteractor.TextFile.RestartReading">
+            <summary>
+            This method resets the reader back to the beginning of the text file.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.TextFile.FinishedReading">
+            <summary>
+            This methods returns whether or not the reader is at the end of the text file.
+            </summary>
+            <returns><code>true</code> if the file has been finished reading.</returns>
+        </member>
+        <member name="T:TextInteractor.TextInteractor">
+            <summary>
+            Defines the <see cref="T:TextInteractor.TextInteractor" />.
+            </summary>
+        </member>
+        <member name="F:TextInteractor.TextInteractor.reader">
+            <summary>
+            Defines the reader.
+            </summary>
+        </member>
+        <member name="F:TextInteractor.TextInteractor.log">
+            <summary>
+            Defines the log.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TextInteractor.TextInteractor"/> class.
+            </summary>
+            <param name="filePath">The file path of the text file.</param>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.Open">
+            <summary>
+            This method opens the text file for reading and writing.
+            </summary>
+            <returns><code>true</code> if file was successfully opened.</returns>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.Close">
+            <summary>
+            This method closes the text file.
+            </summary>
+            <returns><code>true</code> if file was successfully closed.</returns>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.Compare(TextInteractor.TextFile)">
+            <summary>
+            This method compares the text file with another file and returns whether or not the contents of both files are the same.
+            </summary>
+            <param name="txtFile">a text file to be compared with.</param>
+            <returns><code>true</code> if the contents of both files are the same.</returns>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.Compare(TextInteractor.TextFile,System.Boolean,System.Boolean)">
+            <summary>
+            This method compares the text file with another file and returns whether or not the contents of both files are the same.
+            Once file comparison check is completed, the readings of both files are restarted and if there are any discrepancies a
+            compare log file will be generated.
+            </summary>
+            <param name="txtFile">a text file to be compared with.</param>
+            <param name="ignoreWhitespace">if. <code>true</code>, whitespace is ignored while comparing.</param>
+            <param name="caseInsensitive">if. <code>true</code>, case sensitivity is ignored while comparing.</param>
+            <returns><code>true</code> if the contents of both files are the same.</returns>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.Compare(TextInteractor.TextFile,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.Find(System.String)">
+            <summary>
+            The Find.
+            </summary>
+            <param name="expectedString">The expectedString<see cref="T:System.String"/>.</param>
+            <returns><code>true</code> if expectedString is found<see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.FindAndCount(System.String)">
+            <summary>
+            The FindAndCount.
+            </summary>
+            <param name="expectedString">The expectedString<see cref="T:System.String"/>.</param>
+            <returns>The count of the expectedString in file <see cref="T:System.Int32"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.Find(System.String,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.LineExactMatch(System.String,System.Int32)">
+            <summary>
+            The LineExactMatch.
+            </summary>
+            <param name="expectedString">The expectedString<see cref="T:System.String"/>.</param>
+            <param name="lineNum">The lineNum<see cref="T:System.Int32"/>.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.ReadLine">
+            <summary>
+            This method reads a line of characters from the file, returns it as a string, and moves to the next line.
+            </summary>
+            <returns>A string read from the text file.</returns>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.RestartReading">
+            <summary>
+            This method restarts the reader back to the first line of the text file.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.FinishedReading">
+            <summary>
+            This method returns whether or not the reader has reached the end of the file.
+            </summary>
+            <returns><code>true</code> if reader is at the end of the file.</returns>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.AddLine(System.String)">
+            <summary>
+            This method appends a line to the end of the text file.
+            </summary>
+            <param name="contents">The string to be added to the end of the file.</param>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.Modify(System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TextInteractor.TextInteractor.CreateErrorLog(System.String)">
+            <summary>
+            The CreateErrorLog.
+            </summary>
+            <param name="path">The path<see cref="T:System.String"/>.</param>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="T:TextInteractor.TextPrintHelper">
+            <summary>
+            Defines the <see cref="T:TextInteractor.TextPrintHelper" />.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.TextPrintHelper.FirstDifferentChar(System.String,System.String)">
+            <summary>
+            The FirstDifferentChar.
+            </summary>
+            <param name="strA">The strA<see cref="T:System.String"/>.</param>
+            <param name="strB">The strB<see cref="T:System.String"/>.</param>
+            <returns>The <see cref="T:System.Int32"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.TextPrintHelper.PrintBigTitle(System.String)">
+            <summary>
+            The PrintBigTitle.
+            </summary>
+            <param name="title">The title<see cref="T:System.String"/>.</param>
+        </member>
+        <member name="M:TextInteractor.TextPrintHelper.PrintCompareBegin(TextInteractor.TextFile,TextInteractor.TextFile,System.Boolean,System.Boolean)">
+            <summary>
+            The PrintCompareBegin.
+            </summary>
+            <param name="fileA">The fileA<see cref="T:TextInteractor.TextFile"/>.</param>
+            <param name="fileB">The fileB<see cref="T:TextInteractor.TextFile"/>.</param>
+            <param name="ignoreWhitespace">The ignoreWhitespace<see cref="T:System.Boolean"/>.</param>
+            <param name="caseInsensitive">The caseInsensitive<see cref="T:System.Boolean"/>.</param>
+        </member>
+        <member name="M:TextInteractor.TextPrintHelper.PrintCompareEnd(TextInteractor.TextFile,System.Boolean,System.String[])">
+            <summary>
+            The PrintCompareEnd.
+            </summary>
+            <param name="fileA">The fileA<see cref="T:TextInteractor.TextFile"/>.</param>
+            <param name="passed">The passed<see cref="T:System.Boolean"/>.</param>
+            <param name="reasons">The reasons<see cref="T:string[]"/>.</param>
+        </member>
+        <member name="M:TextInteractor.TextPrintHelper.PrintCompareEnd(TextInteractor.TextFile,System.Boolean,System.Collections.Generic.List{System.String})">
+            <summary>
+            The PrintCompareEnd.
+            </summary>
+            <param name="fileA">The fileA<see cref="T:TextInteractor.TextFile"/>.</param>
+            <param name="passed">The passed<see cref="T:System.Boolean"/>.</param>
+            <param name="reasons">The reasons<see cref="T:List{string}"/>.</param>
+        </member>
+        <member name="M:TextInteractor.TextPrintHelper.PrintEnumerable(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            The PrintEnumerable.
+            </summary>
+            <param name="list">The list<see cref="T:IEnumerable{string}"/>.</param>
+        </member>
+    </members>
+</doc>

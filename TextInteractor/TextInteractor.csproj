@@ -2,7 +2,15 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/zzzrst/TextInteractor</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>Basic interaction with text files.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\DUONGCH\Projects\TextInteractor\TextInteractor\TextInteractor.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
