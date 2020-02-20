@@ -7,6 +7,7 @@ namespace TextInteractor
     using System;
     using System.IO;
     using System.Reflection;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Defines the <see cref="TextDriver" />.
@@ -22,12 +23,12 @@ namespace TextInteractor
             string testFile = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\text.txt";
             StreamWriter file = new StreamWriter(testFile);
             file.WriteLine("Hello World!");
-            file.WriteLine("Time is now 12:34!");
-            file.WriteLine("Bye Now!");
+            file.WriteLine("Employee name is [{#john#}], works for [{#ABC BANK#}],[{#Houston#}]");
+            file.WriteLine("Bye NOW!");
             file.Close();
             TextInteractor testFileA = new TextInteractor(testFile);
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            testFileA.Modify(2, "1-1;3-5];[YAY");
+            testFileA.Modify(3, @"\[\{\#(.*?)\#\}\]];[yo");
 
             watch.Stop();
             Console.WriteLine("\nThat took " + watch.ElapsedMilliseconds.ToString() + " milliseconds!");

@@ -461,6 +461,7 @@ namespace TextInteractor
             const int REPLACEONCE = 0;
             const int REPLACEALL = 1;
             const int REPLACELINE = 2;
+            const int REPLACEREGEX = 3;
             const string seperator = "];[";
 
             if (!this.Opened)
@@ -527,6 +528,21 @@ namespace TextInteractor
                     }
 
                     break;
+                case REPLACEREGEX:
+
+                    try
+                    {
+                        // argument will come in format stringToBeReplaced];[replacementString
+                        toBeReplaced = args.Substring(0, args.IndexOf(seperator));
+                        replacementString = args.Substring(args.IndexOf(seperator) + 3);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("                Provided arguments are not in the correct format of stringToBeReplaced];[replacementString");
+                        return false;
+                    }
+
+                    break;
             }
 
             // use the Stream
@@ -561,6 +577,9 @@ namespace TextInteractor
                                     line = replacementString;
                                 }
 
+                                break;
+                            case REPLACEREGEX:
+                                line = Regex.Replace(line, toBeReplaced, replacementString);
                                 break;
                         }
 
