@@ -190,6 +190,118 @@
             </summary>
             <param name="message">The message<see cref="T:System.String"/>.</param>
         </member>
+        <member name="T:TextInteractor.Interactor">
+            <summary>
+            Defines the <see cref="T:TextInteractor.Interactor" />.
+            </summary>
+        </member>
+        <member name="F:TextInteractor.Interactor.reader">
+            <summary>
+            Defines the reader.
+            </summary>
+        </member>
+        <member name="F:TextInteractor.Interactor.log">
+            <summary>
+            Defines the log.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.Interactor.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TextInteractor.Interactor"/> class.
+            </summary>
+            <param name="filePath">The file path of the text file.</param>
+        </member>
+        <member name="M:TextInteractor.Interactor.Open">
+            <summary>
+            This method opens the text file for reading and writing.
+            </summary>
+            <returns><code>true</code> if file was successfully opened.</returns>
+        </member>
+        <member name="M:TextInteractor.Interactor.Close">
+            <summary>
+            This method closes the text file.
+            </summary>
+            <returns><code>true</code> if file was successfully closed.</returns>
+        </member>
+        <member name="M:TextInteractor.Interactor.Compare(TextInteractor.TextFile)">
+            <summary>
+            This method compares the text file with another file and returns whether or not the contents of both files are the same.
+            </summary>
+            <param name="txtFile">a text file to be compared with.</param>
+            <returns><code>true</code> if the contents of both files are the same.</returns>
+        </member>
+        <member name="M:TextInteractor.Interactor.Compare(TextInteractor.TextFile,System.Boolean,System.Boolean)">
+            <summary>
+            This method compares the text file with another file and returns whether or not the contents of both files are the same.
+            Once file comparison check is completed, the readings of both files are restarted and if there are any discrepancies a
+            compare log file will be generated.
+            </summary>
+            <param name="txtFile">a text file to be compared with.</param>
+            <param name="ignoreWhitespace">if. <code>true</code>, whitespace is ignored while comparing.</param>
+            <param name="caseInsensitive">if. <code>true</code>, case sensitivity is ignored while comparing.</param>
+            <returns><code>true</code> if the contents of both files are the same.</returns>
+        </member>
+        <member name="M:TextInteractor.Interactor.Compare(TextInteractor.TextFile,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TextInteractor.Interactor.Find(System.String)">
+            <summary>
+            The Find.
+            </summary>
+            <param name="expectedString">The expectedString<see cref="T:System.String"/>.</param>
+            <returns><code>true</code> if expectedString is found<see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.Interactor.FindAndCount(System.String)">
+            <summary>
+            The FindAndCount.
+            </summary>
+            <param name="expectedString">The expectedString<see cref="T:System.String"/>.</param>
+            <returns>The count of the expectedString in file <see cref="T:System.Int32"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.Interactor.Find(System.String,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TextInteractor.Interactor.LineExactMatch(System.String,System.Int32)">
+            <summary>
+            The LineExactMatch.
+            </summary>
+            <param name="expectedString">The expectedString<see cref="T:System.String"/>.</param>
+            <param name="lineNum">The lineNum<see cref="T:System.Int32"/>.</param>
+            <returns>The <see cref="T:System.Boolean"/>.</returns>
+        </member>
+        <member name="M:TextInteractor.Interactor.ReadLine">
+            <summary>
+            This method reads a line of characters from the file, returns it as a string, and moves to the next line.
+            </summary>
+            <returns>A string read from the text file.</returns>
+        </member>
+        <member name="M:TextInteractor.Interactor.RestartReading">
+            <summary>
+            This method restarts the reader back to the first line of the text file.
+            </summary>
+        </member>
+        <member name="M:TextInteractor.Interactor.FinishedReading">
+            <summary>
+            This method returns whether or not the reader has reached the end of the file.
+            </summary>
+            <returns><code>true</code> if reader is at the end of the file.</returns>
+        </member>
+        <member name="M:TextInteractor.Interactor.AddLine(System.String)">
+            <summary>
+            This method appends a line to the end of the text file.
+            </summary>
+            <param name="contents">The string to be added to the end of the file.</param>
+        </member>
+        <member name="M:TextInteractor.Interactor.Modify(System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TextInteractor.Interactor.CreateErrorLog(System.String)">
+            <summary>
+            The CreateErrorLog.
+            </summary>
+            <param name="path">The path<see cref="T:System.String"/>.</param>
+            <returns>The <see cref="T:System.String"/>.</returns>
+        </member>
         <member name="T:TextInteractor.InvalidColumnLengthException">
             <summary>
             Exception for invalid column lengths.
@@ -337,118 +449,6 @@
             This methods returns whether or not the reader is at the end of the text file.
             </summary>
             <returns><code>true</code> if the file has been finished reading.</returns>
-        </member>
-        <member name="T:TextInteractor.TextInteractor">
-            <summary>
-            Defines the <see cref="T:TextInteractor.TextInteractor" />.
-            </summary>
-        </member>
-        <member name="F:TextInteractor.TextInteractor.reader">
-            <summary>
-            Defines the reader.
-            </summary>
-        </member>
-        <member name="F:TextInteractor.TextInteractor.log">
-            <summary>
-            Defines the log.
-            </summary>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:TextInteractor.TextInteractor"/> class.
-            </summary>
-            <param name="filePath">The file path of the text file.</param>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.Open">
-            <summary>
-            This method opens the text file for reading and writing.
-            </summary>
-            <returns><code>true</code> if file was successfully opened.</returns>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.Close">
-            <summary>
-            This method closes the text file.
-            </summary>
-            <returns><code>true</code> if file was successfully closed.</returns>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.Compare(TextInteractor.TextFile)">
-            <summary>
-            This method compares the text file with another file and returns whether or not the contents of both files are the same.
-            </summary>
-            <param name="txtFile">a text file to be compared with.</param>
-            <returns><code>true</code> if the contents of both files are the same.</returns>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.Compare(TextInteractor.TextFile,System.Boolean,System.Boolean)">
-            <summary>
-            This method compares the text file with another file and returns whether or not the contents of both files are the same.
-            Once file comparison check is completed, the readings of both files are restarted and if there are any discrepancies a
-            compare log file will be generated.
-            </summary>
-            <param name="txtFile">a text file to be compared with.</param>
-            <param name="ignoreWhitespace">if. <code>true</code>, whitespace is ignored while comparing.</param>
-            <param name="caseInsensitive">if. <code>true</code>, case sensitivity is ignored while comparing.</param>
-            <returns><code>true</code> if the contents of both files are the same.</returns>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.Compare(TextInteractor.TextFile,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.Find(System.String)">
-            <summary>
-            The Find.
-            </summary>
-            <param name="expectedString">The expectedString<see cref="T:System.String"/>.</param>
-            <returns><code>true</code> if expectedString is found<see cref="T:System.Boolean"/>.</returns>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.FindAndCount(System.String)">
-            <summary>
-            The FindAndCount.
-            </summary>
-            <param name="expectedString">The expectedString<see cref="T:System.String"/>.</param>
-            <returns>The count of the expectedString in file <see cref="T:System.Int32"/>.</returns>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.Find(System.String,System.Int32)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.LineExactMatch(System.String,System.Int32)">
-            <summary>
-            The LineExactMatch.
-            </summary>
-            <param name="expectedString">The expectedString<see cref="T:System.String"/>.</param>
-            <param name="lineNum">The lineNum<see cref="T:System.Int32"/>.</param>
-            <returns>The <see cref="T:System.Boolean"/>.</returns>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.ReadLine">
-            <summary>
-            This method reads a line of characters from the file, returns it as a string, and moves to the next line.
-            </summary>
-            <returns>A string read from the text file.</returns>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.RestartReading">
-            <summary>
-            This method restarts the reader back to the first line of the text file.
-            </summary>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.FinishedReading">
-            <summary>
-            This method returns whether or not the reader has reached the end of the file.
-            </summary>
-            <returns><code>true</code> if reader is at the end of the file.</returns>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.AddLine(System.String)">
-            <summary>
-            This method appends a line to the end of the text file.
-            </summary>
-            <param name="contents">The string to be added to the end of the file.</param>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.Modify(System.Int32,System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TextInteractor.TextInteractor.CreateErrorLog(System.String)">
-            <summary>
-            The CreateErrorLog.
-            </summary>
-            <param name="path">The path<see cref="T:System.String"/>.</param>
-            <returns>The <see cref="T:System.String"/>.</returns>
         </member>
         <member name="T:TextInteractor.TextPrintHelper">
             <summary>
