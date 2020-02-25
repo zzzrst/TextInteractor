@@ -1,11 +1,7 @@
 # TextInteractor
-### This repository contains the sorce code for
-- TextInteractor
-# Overview
-This extentions allow interaction with text files.
-## Documentation
-Import the TextInteractor workspace.
-Create a new interactor object using:
-```c#
-Interactor interactor = new Interactor(filePath);
-```
+
+Welcome! This is a .NET standard 2.0 library to interact with text files.
+
+For api documentation, please refer to [here](https://zzzrst.github.io/TextInteractor/api/TextInteractor.html)
+
+Examples of usages will be updated soon. Please refer to the [article section](https://zzzrst.github.io/TextInteractor/articles/intro.html).
