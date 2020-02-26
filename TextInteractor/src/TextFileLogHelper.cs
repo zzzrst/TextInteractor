@@ -36,9 +36,9 @@ namespace TextInteractor
         /// <param name="title">The title<see cref="string"/>.</param>
         public static void LogBigTitle(string title)
         {
-            Logger.LogInformation(string.Empty);
-            Logger.LogInformation($"****** {title} ******");
-            Logger.LogInformation(string.Empty);
+            Logger?.LogInformation(string.Empty);
+            Logger?.LogInformation($"****** {title} ******");
+            Logger?.LogInformation(string.Empty);
         }
 
         /// <summary>
@@ -54,24 +54,24 @@ namespace TextInteractor
 
             string comparisonType = fileA.GetType().Name;
 
-            Logger.LogInformation($"{comparisonType}: files to compare");
-            Logger.LogInformation($"   File A: {fileA.FilePath}");
-            Logger.LogInformation($"   File B: {fileB.FilePath}");
-            Logger.LogInformation(string.Empty);
+            Logger?.LogInformation($"{comparisonType}: files to compare");
+            Logger?.LogInformation($"   File A: {fileA.FilePath}");
+            Logger?.LogInformation($"   File B: {fileB.FilePath}");
+            Logger?.LogInformation(string.Empty);
 
             if (ignoreWhitespace)
             {
-                Logger.LogInformation($"{comparisonType}: ignore whitespace comparison enabled");
+                Logger?.LogInformation($"{comparisonType}: ignore whitespace comparison enabled");
             }
 
             if (caseInsensitive)
             {
-                Logger.LogInformation($"{comparisonType}: case insensitivity comparison enabled");
+                Logger?.LogInformation($"{comparisonType}: case insensitivity comparison enabled");
             }
 
             if (ignoreWhitespace || caseInsensitive)
             {
-                Logger.LogInformation(string.Empty);
+                Logger?.LogInformation(string.Empty);
             }
         }
 
@@ -85,13 +85,13 @@ namespace TextInteractor
         {
             if (reasons.Any())
             {
-                Logger.LogInformation(string.Empty);
-                Logger.LogInformation($"{fileA.GetType().Name}: ");
+                Logger?.LogInformation(string.Empty);
+                Logger?.LogInformation($"{fileA.GetType().Name}: ");
             }
 
             foreach (string reason in reasons)
             {
-                Logger.LogInformation(reason);
+                Logger?.LogInformation(reason);
             }
 
             LogBigTitle($"FILE COMPARISION STATUS: {(passed ? "Passed" : "Failure")} ");
@@ -120,7 +120,7 @@ namespace TextInteractor
                 contents = string.Join(", ", list);
             }
 
-            Logger.LogInformation("[" + contents + "]");
+            Logger?.LogInformation("[" + contents + "]");
         }
     }
 }
