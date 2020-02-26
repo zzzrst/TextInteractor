@@ -106,7 +106,7 @@
         </member>
         <member name="M:TextInteractor.TextFile.#ctor(System.String,Microsoft.Extensions.Logging.ILogger)">
             <summary>
-            Initializes a new instance of the <see cref="T:TextInteractor.TextFile"/> class. We also open the file.
+            Initializes a new instance of the <see cref="T:TextInteractor.TextFile"/> class.
             </summary>
             <param name="filePath">The path to the textFile.</param>
             <param name="logger">Logger that is passed in.</param>

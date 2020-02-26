@@ -20,7 +20,7 @@ namespace TextInteractor
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TextFile"/> class. We also open the file.
+        /// Initializes a new instance of the <see cref="TextFile"/> class.
         /// </summary>
         /// <param name="filePath">The path to the textFile.</param>
         /// <param name="logger">Logger that is passed in.</param>
@@ -28,7 +28,6 @@ namespace TextInteractor
         {
             this.Logger = logger;
             this.FilePath = filePath;
-            this.Open();
             TextFileLogHelper.Logger = logger;
         }
 

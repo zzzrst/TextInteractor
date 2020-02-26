@@ -62,7 +62,7 @@ namespace TextInteractor
             }
             catch (Exception ex)
             {
-                this.Logger.LogError(ex.ToString());
+                this.Logger?.LogError(ex.ToString());
                 return false;
             }
 
@@ -79,11 +79,11 @@ namespace TextInteractor
                     this.reader.Close();
                     this.reader.Dispose();
                     this.Opened = false;
-                    this.Logger.LogInformation("TextInteractor: file has been closed: " + this.FilePath);
+                    this.Logger?.LogInformation("TextInteractor: file has been closed: " + this.FilePath);
                 }
                 catch (Exception ex)
                 {
-                    this.Logger.LogError(ex.ToString());
+                    this.Logger?.LogError(ex.ToString());
                     return false;
                 }
             }
@@ -129,21 +129,19 @@ namespace TextInteractor
         public override bool Find(string expectedString, int lineNum)
         {
             this.Open();
+            this.RestartReading();
 
-            using (this.reader)
+            string line;
+            int lineIndex = 1;
+
+            while ((line = this.reader.ReadLine()) != null && lineIndex <= lineNum)
             {
-                string line = string.Empty;
-                int lineIndex = 1;
-
-                while ((line = this.reader.ReadLine()) != null && lineIndex <= lineNum)
+                if (lineIndex == lineNum)
                 {
-                    if (lineIndex == lineNum)
-                    {
-                        return line.Contains(expectedString);
-                    }
-
-                    lineIndex++;
+                    return line.Contains(expectedString);
                 }
+
+                lineIndex++;
             }
 
             return false;
@@ -179,7 +177,7 @@ namespace TextInteractor
                     }
                     catch
                     {
-                        this.Logger.LogError("                Provided arguments are not in the correct format of stringToBeReplaced];[replacementString");
+                        this.Logger?.LogError("                Provided arguments are not in the correct format of stringToBeReplaced];[replacementString");
                         return false;
                     }
 
@@ -214,7 +212,7 @@ namespace TextInteractor
                     }
                     catch
                     {
-                        this.Logger.LogError("                Provided arguments are not in the correct format of line1;line2;line3];[replacementString or lineRange1;lineRange2;lineRange3];[replacementString");
+                        this.Logger?.LogError("                Provided arguments are not in the correct format of line1;line2;line3];[replacementString or lineRange1;lineRange2;lineRange3];[replacementString");
                         return false;
                     }
 
@@ -229,7 +227,7 @@ namespace TextInteractor
                     }
                     catch
                     {
-                        this.Logger.LogError("                Provided arguments are not in the correct format of stringToBeReplaced];[replacementString");
+                        this.Logger?.LogError("                Provided arguments are not in the correct format of stringToBeReplaced];[replacementString");
                         return false;
                     }
 
@@ -387,7 +385,7 @@ namespace TextInteractor
             if (this.log.Any())
             {
                 this.CreateErrorLog(resultFilePath);
-                this.Logger.LogInformation("Compare log saved at " + resultFilePath);
+                this.Logger?.LogInformation("Compare log saved at " + resultFilePath);
             }
 
             return areEqual;
@@ -414,7 +412,7 @@ namespace TextInteractor
                 string actualFileLine = txtFile.ReadLine();
                 if (actualFileLine == null)
                 {
-                    this.Logger.LogInformation("File length are not the same.");
+                    this.Logger?.LogInformation("File length are not the same.");
                     return false;
                 }
 
@@ -441,7 +439,7 @@ namespace TextInteractor
             if (this.log.Any())
             {
                 this.CreateErrorLog(resultFilePath);
-                this.Logger.LogInformation("Compare log saved at " + resultFilePath);
+                this.Logger?.LogInformation("Compare log saved at " + resultFilePath);
             }
 
             return areEqual;
