@@ -231,6 +231,24 @@ namespace NUnitTestTextInteractor
         }
 
         [Test]
+        public void TestReplaceFail()
+        {
+            string result = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Result.txt";
+            using (var file = File.CreateText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModify0.txt"))
+            {
+                file.WriteLine("There is a few lines here.");
+                file.WriteLine("One Here.");
+                file.WriteLine("And one Here.");
+                file.WriteLine("Many Lines.....");
+                file.WriteLine("    Much Wow....");
+            }
+            TextFile fileToModify = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModify0.txt");
+            fileToModify.Open();
+            Assert.IsFalse(fileToModify.Modify(0, "AllAroundUs];[Two"));
+            fileToModify.Close();
+        }
+
+        [Test]
         public void TestReplaceOnce()
         {
             string result = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Result.txt";
@@ -254,9 +272,9 @@ namespace NUnitTestTextInteractor
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult1.txt");
             fileToModify.Open();
             fileToCompare.Open();
-            fileToModify.Modify(0, "One];[Two");
-            fileToModify.Modify(0, "a few];[much");
-            fileToModify.Compare(fileToCompare, result);
+            Assert.IsTrue(fileToModify.Modify(0, "One];[Two"));
+            Assert.IsTrue(fileToModify.Modify(0, "a few];[much"));
+            Assert.IsTrue(fileToModify.Compare(fileToCompare, result));
             fileToModify.Close();
             fileToCompare.Close();
         }
@@ -285,9 +303,9 @@ namespace NUnitTestTextInteractor
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult2.txt");
             fileToModify.Open();
             fileToCompare.Open();
-            fileToModify.Modify(1, "Here];[Arf");
-            fileToModify.Modify(1, ".];[!");
-            fileToModify.Compare(fileToCompare, result);
+            Assert.IsTrue(fileToModify.Modify(1, "Here];[Arf"));
+            Assert.IsTrue(fileToModify.Modify(1, ".];[!"));
+            Assert.IsTrue(fileToModify.Compare(fileToCompare, result));
             fileToModify.Close();
             fileToCompare.Close();
         }
@@ -316,9 +334,9 @@ namespace NUnitTestTextInteractor
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult3.txt");
             fileToModify.Open();
             fileToCompare.Open();
-            fileToModify.Modify(2, "1;3];[Arf Arf");
-            fileToModify.Modify(2, "4-2];[Wow Wow Wow");
-            fileToModify.Compare(fileToCompare, result);
+            Assert.IsTrue(fileToModify.Modify(2, "1;3];[Arf Arf"));
+            Assert.IsTrue(fileToModify.Modify(2, "4-2];[Wow Wow Wow"));
+            Assert.IsTrue(fileToModify.Compare(fileToCompare, result));
             fileToModify.Close();
             fileToCompare.Close();
         }
@@ -347,8 +365,8 @@ namespace NUnitTestTextInteractor
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult4.txt");
             fileToModify.Open();
             fileToCompare.Open();
-            fileToModify.Modify(3, "//[a-zA-Z0-9]];[");
-            fileToModify.Compare(fileToCompare, result);
+            Assert.IsTrue(fileToModify.Modify(3, "//[a-zA-Z0-9]];["));
+            Assert.IsTrue(fileToModify.Compare(fileToCompare, result));
             fileToModify.Close();
             fileToCompare.Close();
         }
