@@ -1,3 +1,4 @@
 # Articles
 
-We have yet to add some articles.
+Welcome.  
+Example of usage are listed below.  
