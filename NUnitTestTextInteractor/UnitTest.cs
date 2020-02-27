@@ -244,7 +244,7 @@ namespace NUnitTestTextInteractor
             }
             TextFile fileToModify = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModify0.txt");
             fileToModify.Open();
-            Assert.IsFalse(fileToModify.Modify(0, "AllAroundUs];[Two"));
+            Assert.IsFalse(fileToModify.Modify(0, "AllAroundTwo"),"The syntax is wrong");
             fileToModify.Close();
         }
 
@@ -272,9 +272,9 @@ namespace NUnitTestTextInteractor
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult1.txt");
             fileToModify.Open();
             fileToCompare.Open();
-            Assert.IsTrue(fileToModify.Modify(0, "One];[Two"));
-            Assert.IsTrue(fileToModify.Modify(0, "a few];[much"));
-            Assert.IsTrue(fileToModify.Compare(fileToCompare, result));
+            Assert.IsTrue(fileToModify.Modify(0, "One];[Two"), "Syntax is correct");
+            Assert.IsTrue(fileToModify.Modify(0, "a few];[much"), "Syntax is correct");
+            Assert.IsTrue(fileToModify.Compare(fileToCompare, result), "The file was modified incorrectly");
             fileToModify.Close();
             fileToCompare.Close();
         }
@@ -303,9 +303,9 @@ namespace NUnitTestTextInteractor
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult2.txt");
             fileToModify.Open();
             fileToCompare.Open();
-            Assert.IsTrue(fileToModify.Modify(1, "Here];[Arf"));
-            Assert.IsTrue(fileToModify.Modify(1, ".];[!"));
-            Assert.IsTrue(fileToModify.Compare(fileToCompare, result));
+            Assert.IsTrue(fileToModify.Modify(1, "Here];[Arf"), "Syntax is correct");
+            Assert.IsTrue(fileToModify.Modify(1, ".];[!"), "Syntax is correct");
+            Assert.IsTrue(fileToModify.Compare(fileToCompare, result), "The file was modified incorrectly");
             fileToModify.Close();
             fileToCompare.Close();
         }
@@ -334,9 +334,9 @@ namespace NUnitTestTextInteractor
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult3.txt");
             fileToModify.Open();
             fileToCompare.Open();
-            Assert.IsTrue(fileToModify.Modify(2, "1;3];[Arf Arf"));
-            Assert.IsTrue(fileToModify.Modify(2, "4-2];[Wow Wow Wow"));
-            Assert.IsTrue(fileToModify.Compare(fileToCompare, result));
+            Assert.IsTrue(fileToModify.Modify(2, "1;3];[Arf Arf"), "Syntax is correct");
+            Assert.IsTrue(fileToModify.Modify(2, "4-2];[Wow Wow Wow"), "Syntax is correct");
+            Assert.IsTrue(fileToModify.Compare(fileToCompare, result), "The file was modified incorrectly");
             fileToModify.Close();
             fileToCompare.Close();
         }
@@ -365,8 +365,8 @@ namespace NUnitTestTextInteractor
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult4.txt");
             fileToModify.Open();
             fileToCompare.Open();
-            Assert.IsTrue(fileToModify.Modify(3, "//[a-zA-Z0-9]];["));
-            Assert.IsTrue(fileToModify.Compare(fileToCompare, result));
+            Assert.IsTrue(fileToModify.Modify(3, "[a-zA-Z0-9]];["), "Syntax is correct");
+            Assert.IsTrue(fileToModify.Compare(fileToCompare, result), "The file was modified incorrectly");
             fileToModify.Close();
             fileToCompare.Close();
         }

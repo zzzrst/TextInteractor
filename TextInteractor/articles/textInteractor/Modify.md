@@ -114,7 +114,7 @@ public class TextComparer
     {
         TextFile file = new TextInteractor("Text.txt")
         file.Open();
-        file.Replace(3,"//[0-9]];[");
+        file.Replace(3,"[0-9]];[");
         file.Close();
     }
 }
