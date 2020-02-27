@@ -68,7 +68,7 @@ public class TextComparer
     }
 }
 ```
-## Compare(TextFile txtFile, string resultFilePath, int startingLine, int startingIndex, int endingLine, int endingIndex)
+## bool Compare(TextFile txtFile, string resultFilePath, int startingLine, int startingIndex, int endingLine, int endingIndex)
 The startingLine is exclusive. The endingLine is inclusive. The startingIndex and endingIndex are based off the substring syntax in c#.  
 
 Text1.txt
@@ -102,7 +102,7 @@ public class TextComparer
     }
 }
 ```
-## Compare(TextFile txtFile, string resultFilePath, int startingLine, int startingIndex, int endingLine, int endingIndex, bool ignoreWhitespace, bool caseInsensitive)
+## bool Compare(TextFile txtFile, string resultFilePath, int startingLine, int startingIndex, int endingLine, int endingIndex, bool ignoreWhitespace, bool caseInsensitive)
 Text1.txt
 ```
 Hello There

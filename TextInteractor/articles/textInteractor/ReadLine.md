@@ -1,5 +1,5 @@
 # ReadLine Examples
-## ReadLine()
+## string ReadLine()
 Text.txt
 ```
 Hello world
@@ -24,7 +24,7 @@ public class TextComparer
     }
 }
 ```
-## RestartReading()
+## void RestartReading()
 Text.txt
 ```
 Hello world
@@ -58,7 +58,7 @@ public class TextComparer
     }
 }
 ```
-## FinishedReading()
+## bool FinishedReading()
 Text.txt
 ```
 Hello world.
