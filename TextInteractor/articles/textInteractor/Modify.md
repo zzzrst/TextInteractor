@@ -82,7 +82,7 @@ public class TextComparer
         TextFile file = new TextInteractor("Text.txt")
         file.Open();
         file.Replace(2,"1,3];[Wow");
-        file.Replace(2,"4-2];[Cool");
+        file.Replace(2,"4-5];[Cool");
         file.Close();
     }
 }

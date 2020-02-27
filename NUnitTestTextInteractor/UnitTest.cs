@@ -293,18 +293,18 @@ namespace NUnitTestTextInteractor
             }
             using (var file = File.CreateText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult2.txt"))
             {
-                file.WriteLine("There is much lines here!");
-                file.WriteLine("Two Arf!");
-                file.WriteLine("And one Arf.");
-                file.WriteLine("Many Lines!!!!!");
-                file.WriteLine("    Much Wow!!!!");
+                file.WriteLine("Thoro is a fow linos horo.");
+                file.WriteLine("Ono Arf.");
+                file.WriteLine("And ono Arf.");
+                file.WriteLine("Many Linos.....");
+                file.WriteLine("    Much Wow....");
             }
             TextFile fileToModify = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModify2.txt");
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult2.txt");
             fileToModify.Open();
             fileToCompare.Open();
             Assert.IsTrue(fileToModify.Modify(1, "Here];[Arf"), "Syntax is correct");
-            Assert.IsTrue(fileToModify.Modify(1, ".];[!"), "Syntax is correct");
+            Assert.IsTrue(fileToModify.Modify(1, "e];[o"), "Syntax is correct");
             Assert.IsTrue(fileToModify.Compare(fileToCompare, result), "The file was modified incorrectly");
             fileToModify.Close();
             fileToCompare.Close();
@@ -325,7 +325,7 @@ namespace NUnitTestTextInteractor
             using (var file = File.CreateText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult3.txt"))
             {
                 file.WriteLine("Arf Arf");
-                file.WriteLine("Two Here.");
+                file.WriteLine("One Here.");
                 file.WriteLine("Arf Arf");
                 file.WriteLine("Wow Wow Wow");
                 file.WriteLine("Wow Wow Wow");
@@ -335,7 +335,7 @@ namespace NUnitTestTextInteractor
             fileToModify.Open();
             fileToCompare.Open();
             Assert.IsTrue(fileToModify.Modify(2, "1;3];[Arf Arf"), "Syntax is correct");
-            Assert.IsTrue(fileToModify.Modify(2, "4-2];[Wow Wow Wow"), "Syntax is correct");
+            Assert.IsTrue(fileToModify.Modify(2, "4-5];[Wow Wow Wow"), "Syntax is correct");
             Assert.IsTrue(fileToModify.Compare(fileToCompare, result), "The file was modified incorrectly");
             fileToModify.Close();
             fileToCompare.Close();
@@ -355,7 +355,7 @@ namespace NUnitTestTextInteractor
             }
             using (var file = File.CreateText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult4.txt"))
             {
-                file.WriteLine("    .");
+                file.WriteLine("     .");
                 file.WriteLine(" .");
                 file.WriteLine("  .");
                 file.WriteLine(" .....");
