@@ -210,7 +210,7 @@ namespace TextInteractor
                             {
                                 int start = int.Parse(lineArg.Substring(0, args.IndexOf("-")));
                                 int end = int.Parse(lineArg.Substring(args.IndexOf("-") + 1));
-                                 
+
                                 while (start <= end)
                                 {
                                     lines.Add(start);
