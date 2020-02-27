@@ -167,6 +167,19 @@ namespace TextInteractor
             switch (replaceType)
             {
                 case REPLACEONCE:
+                    try
+                    {
+                        // argument will come in format stringToBeReplaced];[replacementString
+                        toBeReplaced = args.Substring(0, args.IndexOf(seperator));
+                        replacementString = args.Substring(args.IndexOf(seperator) + 3);
+                    }
+                    catch
+                    {
+                        this.Logger?.LogError("                Provided arguments are not in the correct format of stringToBeReplaced];[replacementString");
+                        return false;
+                    }
+
+                    break;
                 case REPLACEALL:
 
                     try
@@ -184,7 +197,7 @@ namespace TextInteractor
                     break;
                 case REPLACELINE:
 
-                    // argument will be in the form of line;line;line];[replacementString or line-range;line-range;];[replacementString
+                    // argument will be in the form of: line;line;line];[replacementString or: line-range;line-range;];[replacementString
                     try
                     {
                         string lineArgs = args.Substring(0, args.IndexOf(seperator));
@@ -282,11 +295,23 @@ namespace TextInteractor
                 File.Move(this.FilePath + ".tmp", this.FilePath);
             }
 
+            // reopens the file to restore the stream reader.
+            this.Close();
+            this.Open();
+
             return true;
         }
 
         /// <inheritdoc/>
         public override bool Compare(TextFile txtFile, string resultFilePath, bool ignoreWhitespace = false, bool caseInsensitive = false)
+        {
+            bool areEqual;
+            areEqual = this.Compare(txtFile, resultFilePath, 1, 0, int.MaxValue, int.MaxValue, ignoreWhitespace, caseInsensitive);
+            return areEqual;
+        }
+
+        /// <inheritdoc/>
+        public override bool Compare(TextFile txtFile, string resultFilePath, int startingLine, int startingIndex, int endingLine, int endingIndex, bool ignoreWhitespace = false, bool caseInsensitive = false)
         {
             bool areEqual = true;
             string errorMsg = string.Empty;
@@ -319,33 +344,60 @@ namespace TextInteractor
                     break;
                 }
 
-                // if ignore whitespace is enabled
-                if (ignoreWhitespace)
+                // check when to stop comparing
+                if (lineNumber <= endingLine)
                 {
-                    lineA = Regex.Replace(lineA, @"\s+", string.Empty);
-                    lineB = Regex.Replace(lineB, @"\s+", string.Empty);
-                }
+                    // if ignore whitespace is enabled
+                    if (ignoreWhitespace)
+                    {
+                        lineA = Regex.Replace(lineA, @"\s+", string.Empty);
+                        lineB = Regex.Replace(lineB, @"\s+", string.Empty);
+                    }
 
-                // if case insensitivity is enabled
-                if (caseInsensitive)
-                {
-                    lineA = lineA.ToUpper();
-                    lineB = lineB.ToUpper();
-                }
+                    // if case insensitivity is enabled
+                    if (caseInsensitive)
+                    {
+                        lineA = lineA.ToUpper();
+                        lineB = lineB.ToUpper();
+                    }
 
-                // check if line A matches line B in value
-                if (lineA != lineB)
-                {
-                    int diffIndex = TextFileLogHelper.FirstDifferentChar(lineA, lineB);
-                    errorMsg = "line " + lineNumber + " is not equal in both files";
-                    errorMsg += "\n   File A: " + lineA;
-                    errorMsg += "\n   File B: " + lineB;
-                    errorMsg += "\n           " + string.Concat(Enumerable.Repeat(" ", diffIndex)) + "^";
-                    this.log.Add(errorMsg);
-                    areEqual = false;
+                    // check if should start comparing.
+                    if (lineNumber >= startingLine)
+                    {
+                        // Check if on first/last line for comparing.
+                        if (lineNumber == startingLine)
+                        {
+                            lineA = lineA.Substring(startingIndex);
+                            lineB = lineB.Substring(startingIndex);
+                        }
+                        else if (lineNumber == endingLine)
+                        {
+                            lineA = lineA.Substring(0, endingIndex);
+                            lineB = lineB.Substring(0, endingIndex);
+                        }
+
+                        // check if line A matches line B in value
+                        if (lineA != lineB)
+                        {
+                            int diffIndex = TextFileLogHelper.FirstDifferentChar(lineA, lineB);
+                            errorMsg = "line " + lineNumber + " is not equal in both files";
+                            errorMsg += "\n   File A: " + lineA;
+                            errorMsg += "\n   File B: " + lineB;
+                            errorMsg += "\n           " + string.Concat(Enumerable.Repeat(" ", diffIndex)) + "^";
+                            this.log.Add(errorMsg);
+                            areEqual = false;
+                        }
+                    }
                 }
 
                 ++lineNumber;
+            }
+
+            // Reads to the end of file A,
+            // For the case of not reading to the end of A when comparing
+            while (this.ReadLine() != null)
+            {
+                txtFile.ReadLine();
             }
 
             // if file B has less lines than A.
@@ -380,60 +432,6 @@ namespace TextInteractor
             // restart the readers of both files again
             this.RestartReading();
             txtFile.RestartReading();
-
-            // create compare log file if discrepancies exists
-            if (this.log.Any())
-            {
-                this.CreateErrorLog(resultFilePath);
-                this.Logger?.LogInformation("Compare log saved at " + resultFilePath);
-            }
-
-            return areEqual;
-        }
-
-        /// <inheritdoc/>
-        public override bool Compare(TextFile txtFile, string resultFilePath, int startingLine, int startingIndex, int endingLine, int endingIndex, bool ignoreWhitespace = false, bool caseInsensitive = false)
-        {
-            if (!this.Opened)
-            {
-                this.Open();
-            }
-
-            if (!txtFile.Opened)
-            {
-                txtFile.Open();
-            }
-
-            bool areEqual = true;
-            int lineIndex = 1;
-            string expectedFileLine;
-            while ((expectedFileLine = this.ReadLine()) != null && lineIndex <= endingIndex)
-            {
-                string actualFileLine = txtFile.ReadLine();
-                if (actualFileLine == null)
-                {
-                    this.Logger?.LogInformation("File length are not the same.");
-                    return false;
-                }
-
-                expectedFileLine = expectedFileLine.Substring(startingIndex, endingIndex);
-                actualFileLine = actualFileLine.Substring(startingIndex, endingIndex);
-
-                if (expectedFileLine != actualFileLine)
-                {
-                    int diffIndex = TextFileLogHelper.FirstDifferentChar(expectedFileLine, actualFileLine);
-                    string errorMsg = $"line {lineIndex} is not equal in both files \n";
-                    errorMsg += $"   Expected File: {expectedFileLine}\n";
-                    errorMsg += $"   Actual File: {actualFileLine}\n";
-                    errorMsg += "           " + string.Concat(Enumerable.Repeat(" ", diffIndex)) + "^";
-                    this.log.Add(errorMsg);
-                    areEqual = false;
-                }
-
-                lineIndex++;
-            }
-
-            TextFileLogHelper.LogComparisonEnd(this, areEqual, this.log);
 
             // create compare log file if discrepancies exists
             if (this.log.Any())
