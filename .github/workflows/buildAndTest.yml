@@ -15,5 +15,12 @@ jobs:
         dotnet-version: 2.2.108
     - name: Build with dotnet
       run: dotnet build --configuration Release
+      
+  test:
+    needs: build 
+    
+    runs-on: ubuntu-latest
+    
+    steps:
     - name: Run Unit Tests
       run: dotnet test --verbosity normal
