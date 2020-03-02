@@ -1,4 +1,4 @@
-name: build and test
+name: test and publish
 
 on: [push]
 
@@ -29,3 +29,22 @@ jobs:
         dotnet-version: 2.2.108
     - name: Run Unit Tests
       run: dotnet test --verbosity normal
+      
+  publish:
+    needs: [build, test]
+
+    runs-on: ubuntu-latest
+    # also works with windows-latest and macos-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v1
+    - name: Build with dotnet
+      run: dotnet build --configuration Release --version-suffix prerelease-$(date +%Y%m%d%H%M%S)
+      shell: bash
+    - name: Publish nuget
+      run: |
+           for f in ./TextInteractor/bin/Release/*.nupkg
+           do
+             nuget push @$f secrets.NGPackagesToken -Source https://api.nuget.org/v3/index.json
+           done
+      shell: bash
