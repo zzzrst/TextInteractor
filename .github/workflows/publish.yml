@@ -42,8 +42,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 2.2.108
       - name: Build with dotnet
         run: dotnet build --configuration Release --version-suffix prerelease-$(date +%Y%m%d%H%M%S)
+      - name: echo path
+        run: dir
       - name: Publish nuget
         run: dotnet nuget push bin/Release/TextInteractor.1.0.2.nupkg -k secrets.NGPackagesToken -s https://api.nuget.org/v3/index.json
