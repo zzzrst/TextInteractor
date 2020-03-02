@@ -4,8 +4,11 @@ on:
   push:
     branches:
       - master
+  repository_dispatch:
+    types: [push-event]
 
 jobs:
+      
   build:
 
     runs-on: ubuntu-latest
@@ -37,17 +40,15 @@ jobs:
     needs: [build, test]
 
     runs-on: ubuntu-latest
-    # also works with windows-latest and macos-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v1
-    - name: Build with dotnet
-      run: dotnet build --configuration Release --version-suffix prerelease-$(date +%Y%m%d%H%M%S)
-      shell: bash
-    - name: Publish nuget
-      run: |
-           for f in ./TextInteractor/bin/Release/*.nupkg
-           do
-             nuget push @$f secrets.NGPackagesToken -Source https://api.nuget.org/v3/index.json
-           done
-      shell: bash
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 2.2.108
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+      - name: echo path
+        run: dir TextInteractor/bin/Release
+      - name: Publish nuget
+        run: dotnet nuget push bin/Release/TextInteractor.1.0.2.nupkg -k secrets.NGPackagesToken -s https://api.nuget.org/v3/index.json
