@@ -33,12 +33,12 @@ jobs:
     - name: Run Unit Tests
       run: dotnet test --verbosity normal
       
-    - name: Commit files
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git commit -m "Pushing new changes" -a
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+  automerge:
+    needs: [build,test]
+    
+    runs-on: ubuntu-latest
+    steps:
+      - name: automerge
+        uses: "pascalgn/automerge-action@ccae530ae13b6af67a7a2009c266fe925844e658"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
