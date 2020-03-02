@@ -51,4 +51,4 @@ jobs:
       - name: echo path
         run: dir TextInteractor/bin/Release
       - name: Publish nuget
-        run: dotnet nuget push TextInteractor/bin/Release/TextInteractor.1.0.2.nupkg -k secrets.NGPackagesToken -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push TextInteractor/bin/Release/TextInteractor.1.0.2.nupkg -k ${{secrets.NGPackagesToken}} -s https://api.nuget.org/v3/index.json
