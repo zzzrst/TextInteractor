@@ -44,5 +44,5 @@ jobs:
         run: dotnet build --configuration Release --version-suffix prerelease-$(date +%Y%m%d%H%M%S)
         shell: bash
       - name: Publish nuget
-        run: dotnet nuget push TextInteractor/TextInteractor/bin/Release/TextInteractor.1.0.2.nupkg -k secrets.NGPackagesToken -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push bin/Release/TextInteractor.1.0.2.nupkg -k secrets.NGPackagesToken -s https://api.nuget.org/v3/index.json
         shell: bash
