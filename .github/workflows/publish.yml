@@ -4,10 +4,18 @@ on:
   push:
     branches:
       - master
-  check_suite:
-    types: [rerequested, completed]
+  repository_dispatch:
+    types: [push-event]
 
 jobs:
+  myEvent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.client_payload.ref }}
+      - run: echo ${{ github.event.client_payload.sha }}
+        
   build:
 
     runs-on: ubuntu-latest
