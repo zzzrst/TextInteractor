@@ -1,6 +1,9 @@
-name: test and publish
+name: build and test on pull
 
-on: [push]
+on:
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -30,21 +33,12 @@ jobs:
     - name: Run Unit Tests
       run: dotnet test --verbosity normal
       
-  publish:
-    needs: [build, test]
-
-    runs-on: ubuntu-latest
-    # also works with windows-latest and macos-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v1
-    - name: Build with dotnet
-      run: dotnet build --configuration Release --version-suffix prerelease-$(date +%Y%m%d%H%M%S)
-      shell: bash
-    - name: Publish nuget
+    - name: Commit files
       run: |
-           for f in ./TextInteractor/bin/Release/*.nupkg
-           do
-             nuget push @$f secrets.NGPackagesToken -Source https://api.nuget.org/v3/index.json
-           done
-      shell: bash
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Pushing new changes" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
