@@ -45,7 +45,7 @@ jobs:
         shell: bash
       - name: Publish nuget
         run: |
-             for f in ./TextInteractor/bin/Release/*.nupkg
+             for f in TextInteractor/bin/Release/*.nupkg
              do
                dotnet nuget push @$f -k secrets.NGPackagesToken -s https://api.nuget.org/v3/index.json
              done
