@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.7.82" />
-    <PackageReference Include="docfx.console" Version="2.49.0">
+    <PackageReference Include="docfx.console" Version="2.50.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
