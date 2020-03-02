@@ -20,7 +20,7 @@ jobs:
       run: dotnet build --configuration Release
       
   test:
-    needs: build 
+    needs: build
     
     runs-on: ubuntu-latest
     
