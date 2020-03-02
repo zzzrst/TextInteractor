@@ -48,7 +48,9 @@ jobs:
           dotnet-version: 2.2.108
       - name: Build with dotnet
         run: dotnet build --configuration Release --version-suffix prerelease-$(date +%Y%m%d%H%M%S)
+      - name: Change dir to release
+        run: cd TextInteractor/bin/Release
       - name: echo path
         run: dir
       - name: Publish nuget
-        run: dotnet nuget push bin/Release/TextInteractor.1.0.2.nupkg -k secrets.NGPackagesToken -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push TextInteractor.1.0.2.nupkg -k secrets.NGPackagesToken -s https://api.nuget.org/v3/index.json
