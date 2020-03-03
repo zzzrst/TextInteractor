@@ -3,7 +3,7 @@ Below are links to examples of how you would use the TextInteractor class and it
 - [ReadLine](https://zzzrst.github.io/TextInteractor/articles/textInteractor/ReadLine.html)
 - [Compare](https://zzzrst.github.io/TextInteractor/articles/textInteractor/Compare.html)
 - [Find](https://zzzrst.github.io/TextInteractor/articles/textInteractor/Find.html)
-- [Replace](https://zzzrst.github.io/TextInteractor/articles/textInteractor/Modify.html)
+- [Replace](https://zzzrst.github.io/TextInteractor/articles/textInteractor/Replace.html)
 
 ### Sample code
 Text.txt
