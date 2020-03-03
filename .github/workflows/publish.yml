@@ -54,7 +54,7 @@ jobs:
         run: |
           for f (**/*.nupkg)
           do
-            echo $f
+            echo "$f"
             dotnet nuget push "$f" -k ${{secrets.NGPackagesToken}} -s https://api.nuget.org/v3/index.json
           done
         shell: bash
