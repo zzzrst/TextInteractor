@@ -148,106 +148,48 @@ namespace TextInteractor
         }
 
         /// <inheritdoc/>
-        public override bool Modify(int replaceType, string args)
+        public override bool ReplaceOccurances(string toReplace, string replaceWith, int numberOfTimes = -1)
         {
-            const int REPLACEONCE = 0;
-            const int REPLACEALL = 1;
-            const int REPLACELINE = 2;
-            const int REPLACEREGEX = 3;
-            const string seperator = "];[";
-
+            var regex = new Regex(toReplace);
             this.Open();
-
-            bool replacedOnce = false;
-            string toBeReplaced = string.Empty;
-            string replacementString = string.Empty;
-            List<int> lines = new List<int>();
-
-            // argument parsing
-            switch (replaceType)
+            using (this.reader)
             {
-                case REPLACEONCE:
-                    try
+                using (var tempFile = new StreamWriter(this.FilePath + ".tmp"))
+                {
+                    string line;
+                    while ((line = this.reader.ReadLine()) != null)
                     {
-                        // argument will come in format stringToBeReplaced];[replacementString
-                        toBeReplaced = args.Substring(0, args.IndexOf(seperator));
-                        replacementString = args.Substring(args.IndexOf(seperator) + 3);
-                    }
-                    catch
-                    {
-                        this.Logger?.LogError("                Provided arguments are not in the correct format of stringToBeReplaced];[replacementString");
-                        return false;
-                    }
-
-                    break;
-                case REPLACEALL:
-
-                    try
-                    {
-                        // argument will come in format stringToBeReplaced];[replacementString
-                        toBeReplaced = args.Substring(0, args.IndexOf(seperator));
-                        replacementString = args.Substring(args.IndexOf(seperator) + 3);
-                    }
-                    catch
-                    {
-                        this.Logger?.LogError("                Provided arguments are not in the correct format of stringToBeReplaced];[replacementString");
-                        return false;
-                    }
-
-                    break;
-                case REPLACELINE:
-
-                    // argument will be in the form of: line;line;line];[replacementString or: line-range;line-range;];[replacementString
-                    try
-                    {
-                        string lineArgs = args.Substring(0, args.IndexOf(seperator));
-                        replacementString = args.Substring(args.IndexOf(seperator) + 3);
-
-                        List<string> lineArgsSeperated = lineArgs.Split(';').ToList();
-                        foreach (string lineArg in lineArgsSeperated)
+                        if (numberOfTimes > 0)
                         {
-                            if (lineArg.Contains("-"))
-                            {
-                                int start = int.Parse(lineArg.Substring(0, args.IndexOf("-")));
-                                int end = int.Parse(lineArg.Substring(args.IndexOf("-") + 1));
-
-                                while (start <= end)
-                                {
-                                    lines.Add(start);
-                                    start++;
-                                }
-                            }
-                            else
-                            {
-                                lines.Add(int.Parse(lineArg));
-                            }
+                            int matchs = regex.Matches(line).Count;
+                            line = regex.Replace(line, replaceWith, numberOfTimes);
+                            numberOfTimes = Math.Max(numberOfTimes - matchs, 0);
                         }
-                    }
-                    catch
-                    {
-                        this.Logger?.LogError("                Provided arguments are not in the correct format of line1;line2;line3];[replacementString or lineRange1;lineRange2;lineRange3];[replacementString");
-                        return false;
-                    }
+                        else if (numberOfTimes < 0)
+                        {
+                            line = regex.Replace(line, replaceWith);
+                        }
 
-                    break;
-                case REPLACEREGEX:
-
-                    try
-                    {
-                        // argument will come in format stringToBeReplaced];[replacementString
-                        toBeReplaced = args.Substring(0, args.IndexOf(seperator));
-                        replacementString = args.Substring(args.IndexOf(seperator) + 3);
+                        tempFile.WriteLine(line);
                     }
-                    catch
-                    {
-                        this.Logger?.LogError("                Provided arguments are not in the correct format of stringToBeReplaced];[replacementString");
-                        return false;
-                    }
+                }
 
-                    break;
+                this.reader.Close();
+                File.Delete(this.FilePath);
+                File.Move(this.FilePath + ".tmp", this.FilePath);
             }
 
-            // use the Stream
+            // reopens the file to restore the stream reader.
+            this.Close();
+            this.Open();
+
+            return true;
+        }
+
+        /// <inheritdoc/>
+        public override bool ReplaceLine(int[] lines, string replaceWith)
+        {
+            this.Open();
             using (this.reader)
             {
                 using (var tempFile = new StreamWriter(this.FilePath + ".tmp"))
@@ -256,33 +198,9 @@ namespace TextInteractor
                     int lineIndex = 1;
                     while ((line = this.reader.ReadLine()) != null)
                     {
-                        switch (replaceType)
+                        if (lines.Contains(lineIndex))
                         {
-                            case REPLACEONCE:
-                                if (!replacedOnce)
-                                {
-                                    if (line.Contains(toBeReplaced))
-                                    {
-                                        line = line.Replace(toBeReplaced, replacementString);
-                                        replacedOnce = true;
-                                    }
-                                }
-
-                                break;
-
-                            case REPLACEALL:
-                                line = line.Replace(toBeReplaced, replacementString);
-                                break;
-                            case REPLACELINE:
-                                if (lines.Contains(lineIndex))
-                                {
-                                    line = replacementString;
-                                }
-
-                                break;
-                            case REPLACEREGEX:
-                                line = Regex.Replace(line, toBeReplaced, replacementString);
-                                break;
+                            line = replaceWith;
                         }
 
                         tempFile.WriteLine(line);

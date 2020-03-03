@@ -85,12 +85,21 @@ namespace TextInteractor
         public abstract bool Find(string expectedString, int line);
 
         /// <summary>
-        /// This methods modifies the textfile by replacing text in the text file.
+        /// Replaces all occurances of the given string with the replacement string in the order they appear.
         /// </summary>
-        /// <param name="replaceType"> 0 means to replace once, 1 means to replaceAll, 2 means to replaceLine,3 means to replace regex<see cref="int"/>.</param>
-        /// <param name="args">The args<see cref="string"/>.</param>
-        /// <returns> <code>true</code> if the modification was successful.<see cref="bool"/>.</returns>
-        public abstract bool Modify(int replaceType, string args);
+        /// <param name="toReplace">The string to replace.</param>
+        /// <param name="replaceWith">What string to replace with.</param>
+        /// <param name="numberOfTimes">Number of occurances to replace. Any number less than 0 is replace all. Default is replace all.</param>
+        /// <returns><code>true</code> if the modification was successful.<see cref="bool"/>.</returns>
+        public abstract bool ReplaceOccurances(string toReplace, string replaceWith, int numberOfTimes = -1);
+
+        /// <summary>
+        /// Replaces all the given lines with the replacement string.
+        /// </summary>
+        /// <param name="lines">The lines to replace.</param>
+        /// <param name="replaceWith">The string to replace each lines with.</param>
+        /// <returns><code>true</code> if the modification was successful.</returns>
+        public abstract bool ReplaceLine(int[] lines, string replaceWith);
 
         /// <summary>
         /// This method compares the text file with another text file.
