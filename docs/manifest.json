@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "WlDvbRBikTXdLsgkyUBYtQ=="
+          "hash": "Z/U9UB1iFL1VOkIP18EgFw=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "BYbVHziPXNz1Kktv+PHkNw=="
+          "hash": "n1RxvULMN2uWOnwXsK7mtQ=="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/textInteractor.html",
-          "hash": "TvUtcU6yd/hFFhB4mKJKSw=="
+          "hash": "73wh4eYv+QckfZPg2nvzyg=="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/textInteractor/Compare.html",
-          "hash": "HfSJ0OCm+MAHjp33sxoQ9w=="
+          "hash": "vm0/TBP2kxKIEaeTdoPXXQ=="
         }
       },
       "is_incremental": false,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/textInteractor/Find.html",
-          "hash": "TqjK+6eezHLSWp3dVOoxTQ=="
+          "hash": "YRi4/fBICKBBkuV6R8vPZw=="
         }
       },
       "is_incremental": false,
@@ -69,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/textInteractor/ReadLine.html",
-          "hash": "H3xFqAFurQt+5C/XL3R30Q=="
+          "hash": "PgXK+2MCbuEtDeRmDrD65w=="
         }
       },
       "is_incremental": false,
@@ -81,22 +81,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/textInteractor/Replace.html",
-          "hash": "SECugxhiIS9wJlVLnQHeGQ=="
+          "hash": "kos2UXNuAh7o3KjfdsHAzA=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Toc",
       "source_relative_path": "articles/toc.yml",
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "eZrzRYBbtQ47Z0JtVuq/AQ=="
+          "hash": "9yTXaurdiWyjAWGfr1aSzw=="
         }
       },
       "is_incremental": false,
@@ -108,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "ZzK+/9snHBRY4/8BNcIadg=="
+          "hash": "pFJ1VqwSusT3z04/IsY/8w=="
         }
       },
       "is_incremental": false,

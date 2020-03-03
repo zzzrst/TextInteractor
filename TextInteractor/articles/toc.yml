@@ -9,5 +9,5 @@
     href: textInteractor/Compare.md
   - name: Find Examples
     href: textInteractor/Find.md
-  - name: Modify Examples
-    href: textInteractor/Modify.md
+  - name: Replace Examples
+    href: textInteractor/Replace.md
