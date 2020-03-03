@@ -9,10 +9,10 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "hq5sGsDYIx6ldDhUPdtZvw=="
+          "hash": "WlDvbRBikTXdLsgkyUBYtQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -21,10 +21,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "L4Qw2f2G5JDV8YsXCqyKHA=="
+          "hash": "BYbVHziPXNz1Kktv+PHkNw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -33,10 +33,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/textInteractor.html",
-          "hash": "5CZzu8M3DdOn1v3oNVKcVQ=="
+          "hash": "TvUtcU6yd/hFFhB4mKJKSw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -45,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/textInteractor/Compare.html",
-          "hash": "NWi3qAJ5FZaAlhVuTc+B/A=="
+          "hash": "HfSJ0OCm+MAHjp33sxoQ9w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -57,22 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/textInteractor/Find.html",
-          "hash": "oDw0dFx8yvO2gyF+tOXwFg=="
+          "hash": "TqjK+6eezHLSWp3dVOoxTQ=="
         }
       },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/textInteractor/Modify.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/textInteractor/Modify.html",
-          "hash": "PxxVix3r/pDZ9KZ6obqRog=="
-        }
-      },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -81,19 +69,34 @@
       "output": {
         ".html": {
           "relative_path": "articles/textInteractor/ReadLine.html",
-          "hash": "xq+m46Wt1hJB27PDN5/E2Q=="
+          "hash": "H3xFqAFurQt+5C/XL3R30Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "articles/textInteractor/Replace.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/textInteractor/Replace.html",
+          "hash": "SECugxhiIS9wJlVLnQHeGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Toc",
       "source_relative_path": "articles/toc.yml",
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "tBP2gl3Vti9iAREhp7Y57Q=="
+          "hash": "eZrzRYBbtQ47Z0JtVuq/AQ=="
         }
       },
       "is_incremental": false,
@@ -105,10 +108,10 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "Q5Qkwnn1AY9Dh5DnE/H5qA=="
+          "hash": "ZzK+/9snHBRY4/8BNcIadg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -130,31 +133,33 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Disable incremental build by force rebuild option.",
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0
+        "skipped_file_count": 0,
+        "full_build_reason_code": "ForceRebuild"
       },
       "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 8,
+          "skipped_file_count": 0
+        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 8,
-          "skipped_file_count": 8
         }
       }
     },
     {
       "status": {
-        "can_incremental": true,
-        "details": "Can support incremental post processing.",
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: it's disabled.",
         "incrementalPhase": "postProcessing",
         "total_file_count": 0,
         "skipped_file_count": 0

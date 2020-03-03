@@ -231,30 +231,12 @@ namespace NUnitTestTextInteractor
         }
 
         [Test]
-        public void TestReplaceFail()
-        {
-            string result = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Result.txt";
-            using (var file = File.CreateText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModify0.txt"))
-            {
-                file.WriteLine("There is a few lines here.");
-                file.WriteLine("One Here.");
-                file.WriteLine("And one Here.");
-                file.WriteLine("Many Lines.....");
-                file.WriteLine("    Much Wow....");
-            }
-            TextFile fileToModify = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModify0.txt");
-            fileToModify.Open();
-            Assert.IsFalse(fileToModify.Modify(0, "AllAroundTwo"),"The syntax is wrong");
-            fileToModify.Close();
-        }
-
-        [Test]
         public void TestReplaceOnce()
         {
             string result = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Result.txt";
             using (var file = File.CreateText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModify1.txt"))
             {
-                file.WriteLine("There is a few lines here.");
+                file.WriteLine("There is few lines here.");
                 file.WriteLine("One Here.");
                 file.WriteLine("And one Here.");
                 file.WriteLine("Many Lines.....");
@@ -272,8 +254,38 @@ namespace NUnitTestTextInteractor
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult1.txt");
             fileToModify.Open();
             fileToCompare.Open();
-            Assert.IsTrue(fileToModify.Modify(0, "One];[Two"), "Syntax is correct");
-            Assert.IsTrue(fileToModify.Modify(0, "a few];[much"), "Syntax is correct");
+            Assert.IsTrue(fileToModify.ReplaceOccurances("One", "Two", 1), "Should Pass");
+            Assert.IsTrue(fileToModify.ReplaceOccurances("few", "much", 1), "Should Pass");
+            Assert.IsTrue(fileToModify.Compare(fileToCompare, result), "The file was modified incorrectly");
+            fileToModify.Close();
+            fileToCompare.Close();
+        }
+
+        [Test]
+        public void TestReplaceMultiple()
+        {
+            string result = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Result.txt";
+            using (var file = File.CreateText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModify5.txt"))
+            {
+                file.WriteLine("There is a few lines here.");
+                file.WriteLine("One Here.");
+                file.WriteLine("And one Here.");
+                file.WriteLine("Many Lines.....");
+                file.WriteLine("    Much Wow....");
+            }
+            using (var file = File.CreateText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult5.txt"))
+            {
+                file.WriteLine("Thoro is a fow linos here.");
+                file.WriteLine("One Here.");
+                file.WriteLine("And one Here.");
+                file.WriteLine("Many Lines.....");
+                file.WriteLine("    Much Wow....");
+            }
+            TextFile fileToModify = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModify5.txt");
+            TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult5.txt");
+            fileToModify.Open();
+            fileToCompare.Open();
+            Assert.IsTrue(fileToModify.ReplaceOccurances("e", "o", 4), "Should Pass");
             Assert.IsTrue(fileToModify.Compare(fileToCompare, result), "The file was modified incorrectly");
             fileToModify.Close();
             fileToCompare.Close();
@@ -303,8 +315,8 @@ namespace NUnitTestTextInteractor
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult2.txt");
             fileToModify.Open();
             fileToCompare.Open();
-            Assert.IsTrue(fileToModify.Modify(1, "Here];[Arf"), "Syntax is correct");
-            Assert.IsTrue(fileToModify.Modify(1, "e];[o"), "Syntax is correct");
+            Assert.IsTrue(fileToModify.ReplaceOccurances("Here","Arf"), "Should Pass");
+            Assert.IsTrue(fileToModify.ReplaceOccurances("e","o"), "Should Pass");
             Assert.IsTrue(fileToModify.Compare(fileToCompare, result), "The file was modified incorrectly");
             fileToModify.Close();
             fileToCompare.Close();
@@ -334,8 +346,8 @@ namespace NUnitTestTextInteractor
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult3.txt");
             fileToModify.Open();
             fileToCompare.Open();
-            Assert.IsTrue(fileToModify.Modify(2, "1;3];[Arf Arf"), "Syntax is correct");
-            Assert.IsTrue(fileToModify.Modify(2, "4-5];[Wow Wow Wow"), "Syntax is correct");
+            Assert.IsTrue(fileToModify.ReplaceLine(new int[] {1,3},"Arf Arf"), "Should Pass");
+            Assert.IsTrue(fileToModify.ReplaceLine(new int[] { 4, 5 }, "Wow Wow Wow"), "Should Pass");
             Assert.IsTrue(fileToModify.Compare(fileToCompare, result), "The file was modified incorrectly");
             fileToModify.Close();
             fileToCompare.Close();
@@ -365,7 +377,7 @@ namespace NUnitTestTextInteractor
             TextFile fileToCompare = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextModifyResult4.txt");
             fileToModify.Open();
             fileToCompare.Open();
-            Assert.IsTrue(fileToModify.Modify(3, "[a-zA-Z0-9]];["), "Syntax is correct");
+            Assert.IsTrue(fileToModify.ReplaceOccurances("[a-zA-Z0-9]",""), "Should Pass");
             Assert.IsTrue(fileToModify.Compare(fileToCompare, result), "The file was modified incorrectly");
             fileToModify.Close();
             fileToCompare.Close();
