@@ -51,10 +51,4 @@ jobs:
       - name: echo path
         run: dir TextInteractor/bin/Release
       - name: Publish nuget
-        run: |
-          for f in TextInteractor/**/*.nupkg
-          do
-            echo "$f"
-            dotnet nuget push "$f" -k ${{secrets.NGPackagesToken}} -s https://api.nuget.org/v3/index.json
-          done
-        shell: bash
+        run: dotnet nuget push **/*.nupkg -k ${{secrets.NGPackagesToken}} -s https://api.nuget.org/v3/index.json --skip-duplicate
