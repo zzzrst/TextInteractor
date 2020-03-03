@@ -54,7 +54,7 @@ jobs:
         run: |
           for f in TextInteractor/**/*.nupkg
           do
-            echo @$f
-            dotnet nuget push @$f -k ${{secrets.NGPackagesToken}} -s https://api.nuget.org/v3/index.json
+            echo $f
+            dotnet nuget push "$f" -k ${{secrets.NGPackagesToken}} -s https://api.nuget.org/v3/index.json
           done
         shell: bash
