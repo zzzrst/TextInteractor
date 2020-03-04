@@ -218,16 +218,12 @@ namespace NUnitTestTextInteractor
         {
             string result = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Result.txt";
             TextFile fileToCompareExactSimilar = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextSimilar.txt");
-            TextFile fileToCompareWhiteSpaceCaseSensitive = new TextInteractor(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\TextSimilarWhiteSpaceCaseSensitive.txt");
 
             fileMultipleLines.Open();
-            fileToCompareWhiteSpaceCaseSensitive.Open();
+            fileToCompareExactSimilar.Open();
             Assert.IsFalse(fileMultipleLines.Compare(fileToCompareExactSimilar, result), "Files are Different.");
-            Assert.IsTrue(fileMultipleLines.Compare(fileToCompareExactSimilar, result, 2, 3, 4, 12), "Files are Same at certain lines.");
-            Assert.IsFalse(fileMultipleLines.Compare(fileToCompareWhiteSpaceCaseSensitive, result, 2, 3, 4, 11), "Files are different even at the same line.");
-            Assert.IsTrue(fileMultipleLines.Compare(fileToCompareWhiteSpaceCaseSensitive, result, 2, 3, 4, 11, true, true), "Files are identical at certain lines ignoring whitespace and cases.");
             fileMultipleLines.Close();
-            fileToCompareWhiteSpaceCaseSensitive.Close();
+            fileToCompareExactSimilar.Close();
         }
 
         [Test]

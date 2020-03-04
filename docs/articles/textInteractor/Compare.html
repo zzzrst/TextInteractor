@@ -129,63 +129,6 @@ Ha ve fu n!
     }
 }
 </code></pre>
-<h2 id="bool-comparetextfile-txtfile-string-resultfilepath-int-startingline-int-startingindex-int-endingline-int-endingindex">bool Compare(TextFile txtFile, string resultFilePath, int startingLine, int startingIndex, int endingLine, int endingIndex)</h2>
-<p>The startingLine is exclusive. The endingLine is inclusive. The startingIndex and endingIndex are based off the substring syntax in c#.</p>
-<p>Text1.txt</p>
-<pre><code>Hello There
-This document says hi.
-Now its time
-to say goodbye
-</code></pre>
-<p>Text2.txt</p>
-<pre><code>Heya!
-Some document says hi.
-Now its here
-to write more code!
-</code></pre>
-<p>TextComparer.cs</p>
-<pre><code class="lang-c#">public class TextComparer
-{
-    using TextInteractor;
-
-    public static Main(string[] args)
-    {
-        TextFile file1 = new TextInteractor(&quot;Text1.txt&quot;)
-        TextFile file2 = new TextInteractor(&quot;Text2.txt&quot;)
-
-        Console.Writeline(file1.Compare(file2,&quot;Temp/Result.txt&quot;,1,4,3,8));
-        //true
-    }
-}
-</code></pre>
-<h2 id="bool-comparetextfile-txtfile-string-resultfilepath-int-startingline-int-startingindex-int-endingline-int-endingindex-bool-ignorewhitespace-bool-caseinsensitive">bool Compare(TextFile txtFile, string resultFilePath, int startingLine, int startingIndex, int endingLine, int endingIndex, bool ignoreWhitespace, bool caseInsensitive)</h2>
-<p>Text1.txt</p>
-<pre><code>Hello There
-This document says hi.
-Now its time
-to say goodbye
-</code></pre>
-<p>Text2.txt</p>
-<pre><code>HE YA!
-SO ME DOC ument says hi.
-Now it s HE re
-to write more code!
-</code></pre>
-<p>TextComparer.cs</p>
-<pre><code class="lang-c#">public class TextComparer
-{
-    using TextInteractor;
-
-    public static Main(string[] args)
-    {
-        TextFile file1 = new TextInteractor(&quot;Text1.txt&quot;)
-        TextFile file2 = new TextInteractor(&quot;Text2.txt&quot;)
-
-        Console.Writeline(file1.Compare(file2,&quot;Temp/Result.txt&quot;,1,4,3,6,true,true));
-        //true
-    }
-}
-</code></pre>
 </article>
           </div>
           

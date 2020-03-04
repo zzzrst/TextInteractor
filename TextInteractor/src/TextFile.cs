@@ -110,21 +110,5 @@ namespace TextInteractor
         /// <param name="caseInsensitive">Set to true if we are going to perform case insensitive comparison. Default is false.</param>
         /// <returns><code>true</code> if the contents of the text files match.</returns>
         public abstract bool Compare(TextFile txtFile, string resultFilePath, bool ignoreWhitespace = false, bool caseInsensitive = false);
-
-        /// <summary>
-        /// This method compares the text file with another text file specifying the top left and bottom right coordinates.
-        /// If we consider the file to be a 2D matrix of characters, the startingLine and startingIndex would be the top left corner (x, y) respectively.
-        /// The endingLine and endingIndex would be the bottom right coordinate on the bottom right corner.
-        /// </summary>
-        /// <param name="txtFile">The textfile that you want to compare with.<see cref="TextFile"/>.</param>
-        /// <param name="resultFilePath">Text file that shows the comparison result when different.</param>
-        /// <param name="startingLine">The line index to start the comparison.<see cref="int"/>.</param>
-        /// <param name="startingIndex">The character index to start the comparison.<see cref="int"/>.</param>
-        /// <param name="endingLine">The line index to stop the comparison.<see cref="int"/>.</param>
-        /// <param name="endingIndex">The character index to end the comparison.<see cref="int"/>.</param>
-        /// <param name="ignoreWhitespace">Set to true if we are going to ignore whitespace during comparison. Default is false.</param>
-        /// <param name="caseInsensitive">Set to true if we are going to perform case insensitive comparison. Default is false.</param>
-        /// <returns><code>true</code> if the contents of the text file match.</returns>
-        public abstract bool Compare(TextFile txtFile, string resultFilePath, int startingLine, int startingIndex, int endingLine, int endingIndex, bool ignoreWhitespace = false, bool caseInsensitive = false);
     }
 }
