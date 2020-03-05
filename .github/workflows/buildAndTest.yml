@@ -1,9 +1,11 @@
-name: build and test on pull
+name: build and test on pull dependabot
 
 on:
   pull_request:
     branches:
       - master
+    tags:
+      - dependencies    
 
 jobs:
   build:
