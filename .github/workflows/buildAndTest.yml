@@ -3,9 +3,7 @@ name: build and test on pull
 on:
   pull_request:
     branches:
-      - master
-    tags-ignore:
-      - dependencies 
+      - master  
 
 jobs:
   build:
@@ -34,3 +32,26 @@ jobs:
         dotnet-version: 2.2.108
     - name: Run Unit Tests
       run: dotnet test --verbosity normal
+      
+  automerge:
+    needs: [build,test]
+    
+    runs-on: ubuntu-latest
+    steps:
+      - name: automerge
+        uses: "pascalgn/automerge-action@ccae530ae13b6af67a7a2009c266fe925844e658"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_LABELS: "dependencies"
+          
+  trigger_workflow:
+    needs: [automerge]
+    
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1.0.0
+        if: github.actor == "dependabot-preview"
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          event-type: push-event
